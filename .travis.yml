@@ -1,0 +1,28 @@
+language: ruby
+
+before_script:
+  - cp config/database.yml.travis config/database.yml
+  - mysql -e "create database IF NOT EXISTS avalia_mais_test;" -uroot
+  - export MAILGUN_API_KEY="secret"
+  - rake db:migrate RAILS_ENV=test
+
+script:
+  - bundle install
+  - bundle exec rake db:load_config
+  - bundle exec rake db:drop
+  - bundle exec rake db:create
+  - bundle exec rake db:migrate
+  - bundle exec rake spec
+
+  addons:
+    code_climate:
+        repo_token: d7e853c91d45ed91c56fbb0ef215ab8d0493779c02a7fb342bd41fc244b398d2
+
+rvm:
+- 2.2.3
+
+branches:
+  only:
+  - master
+  - dev
+  - sprint0
