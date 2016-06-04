@@ -3,6 +3,9 @@ class Topic < ActiveRecord::Base
 	belongs_to :user
 	before_create :set_create_date
 
+	validates :title, presence: {:message => 'O conteúdo não pode estar vazio'}
+	validates :body, presence: {:message => 'O conteúdo não pode estar vazio'}
+
 #something it's wrong
 =begin
 	#title
