@@ -76,7 +76,9 @@ group :development do
   gem "cocoon"
   gem "nested_form_fields", ">= 0.7.8"
 
-  gem 'pg', group: :production
+group :production do
+  gem 'pg', '~> 0.18.4'
+end  
 
 
 end
